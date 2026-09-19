@@ -102,7 +102,9 @@ object Company119Api {
         val weekOffslot: Int?,
         val status: String?,
         val store: String?,
-        val timestamp: String?
+        val timestamp: String?,
+        val doneRank: Int?,
+        val weekRank: Int?
     )
 
     sealed class StatsResult {
@@ -167,12 +169,14 @@ object Company119Api {
                         rejected = json.optInt("rejected"),
                         dispatch = json.optInt("dispatch_cancel"),
                         delivery = json.optInt("delivery_cancel"),
-                        rejectLeft = week.first,
-                        weekCompleted = week.second,
-                        weekOffslot = week.third,
+                        rejectLeft = week.remaining,
+                        weekCompleted = week.completed,
+                        weekOffslot = week.offslot,
                         status = json.optString("status"),
                         store = prefs.getString("store_name", null),
-                        timestamp = json.optString("timestamp")
+                        timestamp = json.optString("timestamp"),
+                        doneRank = if (json.has("done_rank")) json.optInt("done_rank") else null,
+                        weekRank = week.rank
                     )
                 )
             }
@@ -182,21 +186,27 @@ object Company119Api {
         }
     }
 
-    // Triple(잔여거절권=total.remaining, 주간총완료=total.completed, 주간심야=total.offslot=시간외/SLA밖) — /api/record?week=0 한 번 호출
-    private fun fetchWeekTotals(): Triple<Int?, Int?, Int?> {
+    // 잔여거절권=total.remaining, 주간총완료=total.completed, 주간심야=total.offslot(시간외/SLA밖), 주간순위=week_rank(top-level)
+    private data class WeekTotals(val remaining: Int?, val completed: Int?, val offslot: Int?, val rank: Int?)
+
+    // /api/record?week=0 한 번 호출
+    private fun fetchWeekTotals(): WeekTotals {
+        val empty = WeekTotals(null, null, null, null)
         val request = req("/api/record?week=0").get().build()
         return try {
             client.newCall(request).execute().use { resp ->
-                if (!resp.isSuccessful) return Triple(null, null, null)
-                val body = resp.body?.string() ?: return Triple(null, null, null)
-                val total = JSONObject(body).optJSONObject("total") ?: return Triple(null, null, null)
+                if (!resp.isSuccessful) return empty
+                val body = resp.body?.string() ?: return empty
+                val root = JSONObject(body)
+                val rank = if (root.has("week_rank")) root.optInt("week_rank") else null
+                val total = root.optJSONObject("total") ?: return WeekTotals(null, null, null, rank)
                 val remaining = if (total.has("remaining")) total.optInt("remaining") else null
                 val completed = if (total.has("completed")) total.optInt("completed") else null
                 val offslot = total.optInt("offslot", 0)
-                Triple(remaining, completed, offslot)
+                WeekTotals(remaining, completed, offslot, rank)
             }
         } catch (e: Exception) {
-            Triple(null, null, null)
+            empty
         }
     }
 

@@ -19,7 +19,7 @@
     <string name="stat_delivery">배달취소</string>
     <string name="stat_reject_left">잔여거절권</string>
     <string name="stat_week_completed">주간 총 완료</string>
-    <string name="stat_week_diff">"ㆍ주간 목표 잔여 갯수 %+d"</string>
+    <string name="stat_week_diff">" · 주간 목표 잔여 갯수 %+d"</string>
     <string name="btn_refresh">새로고침</string>
     <string name="btn_collapse">접기</string>
     <string name="btn_logout">로그아웃</string>

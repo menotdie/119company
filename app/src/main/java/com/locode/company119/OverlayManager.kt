@@ -48,6 +48,7 @@ class OverlayManager(
     private lateinit var tvDelivery: TextView
     private lateinit var tvRejectLeft: TextView
     private lateinit var tvWeekCompleted: TextView
+    private lateinit var tvRank: TextView
     private lateinit var tvStatus: TextView
     private lateinit var btnRefresh: TextView
     private lateinit var btnCollapse: TextView
@@ -218,6 +219,19 @@ class OverlayManager(
             setPadding(dp(8), 0, 0, 0)
         }
         card.addView(tvWeekCompleted, LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        ).apply { topMargin = dp(6) })
+
+        // 주간 총 완료 바로 밑 순위 (같은 스타일)
+        tvRank = TextView(ctx).apply {
+            textSize = 13f
+            setTypeface(typeface, Typeface.BOLD)
+            setTextColor(ContextCompat.getColor(ctx, R.color.text))
+            gravity = Gravity.START
+            setPadding(dp(8), 0, 0, 0)
+        }
+        card.addView(tvRank, LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         ).apply { topMargin = dp(6) })
@@ -400,6 +414,11 @@ class OverlayManager(
         tvDelivery.text = s.delivery.toString()
         weekAnim?.cancel()
         weekAnim = null
+        // 당일 순위(/api/me)와 주간 순위(/api/record)는 출처가 달라 각각 없을 수 있다 — 있는 쪽만 한 줄에 붙인다
+        tvRank.text = listOfNotNull(
+            s.doneRank?.let { "당일 순위 $it" },
+            s.weekRank?.let { "주간 순위 $it" }
+        ).joinToString(" · ")
         tvWeekCompleted.text = if (s.weekCompleted == null) "" else {
             val diff = s.weekCompleted - Company119Api.getWeekGoal()
             val num = String.format("%+d", diff)
