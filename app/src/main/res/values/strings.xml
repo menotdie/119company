@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">119COMPANY 현황</string>
+    <string name="logo">119COMPANY</string>
+    <string name="desc">라이더 현황 조회</string>
+    <string name="lbl_phone">휴대폰번호</string>
+    <string name="lbl_password">비밀번호</string>
+    <string name="hint_phone">010-0000-0000</string>
+    <string name="hint_password">비밀번호</string>
+    <string name="btn_login">로그인</string>
+    <string name="btn_loading">로그인 중...</string>
+    <string name="err_empty">모든 항목을 입력해주세요.</string>
+    <string name="err_network">서버 연결 실패</string>
+    <string name="err_login">로그인 실패</string>
+
+    <string name="stat_completed">완료</string>
+    <string name="stat_rejected">거절</string>
+    <string name="stat_dispatch">배차취소</string>
+    <string name="stat_delivery">배달취소</string>
+    <string name="stat_reject_left">잔여거절권</string>
+    <string name="stat_week_completed">주간 총 완료</string>
+    <string name="stat_week_diff">"ㆍ주간 목표 잔여 갯수 %+d"</string>
+    <string name="btn_refresh">새로고침</string>
+    <string name="btn_collapse">접기</string>
+    <string name="btn_logout">로그아웃</string>
+    <string name="btn_exit">종료</string>
+    <string name="btn_settings">설정</string>
+    <string name="settings_week_goal">주간 목표</string>
+    <string name="settings_save">저장</string>
+    <string name="settings_cancel">취소</string>
+
+    <string name="action_stop">종료</string>
+
+    <string name="notif_channel">119COMPANY 현황 오버레이</string>
+    <string name="notif_title">119COMPANY 현황 실행 중</string>
+    <string name="notif_text">탭하면 로그인 화면으로 이동</string>
+
+    <string name="need_overlay_permission">다른 앱 위에 표시 권한이 필요합니다.</string>
+    <string name="a11y_prompt_title">통화 중에도 표시하려면</string>
+    <string name="a11y_prompt_msg">통화가 시작되면 시스템이 \'다른 앱 위에 표시\' 권한을 일시적으로 차단합니다. 접근성 서비스를 켜면 통화 중에도 위젯이 유지됩니다.\n\n설정 &gt; 설치된 앱 &gt; \'119COMPANY 통화 중 표시\' 를 켜주세요.</string>
+    <string name="a11y_prompt_open">접근성 설정 열기</string>
+    <string name="a11y_prompt_skip">일반 모드로 시작</string>
+    <string name="a11y_label">119COMPANY 통화 중 표시</string>
+    <string name="a11y_desc">통화 중에도 라이더 현황 위젯을 표시합니다.</string>
+    <string name="msg_logged_out">로그아웃 되셨습니다.\n종료 후 앱을 재실행 하세요.</string>
+</resources>

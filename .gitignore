@@ -1,0 +1,46 @@
+# Gradle
+.gradle/
+build/
+local.properties
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Keystore safety net
+*.jks
+*.keystore
+*signing.properties
+
+# APK artifacts
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ── 비밀값 공통 차단 (2026-08-01 일괄) ──
+.env
+*.env
+!*.env.example
+*.key
+*.pem
+*.p12
+*.jks
+*.keystore
+id_rsa*
+id_ed25519*
+id_ecdsa*
+*.ppk
+*credentials*
+*secret*
+local.properties
+
+# Kotlin
+.kotlin/
