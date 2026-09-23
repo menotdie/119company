@@ -435,7 +435,7 @@ class OverlayManager(
             }
             // stat_week_diff ends with %+d -> label = formatted minus the number tail
             sb.append(ctx.getString(R.string.stat_week_diff, diff).dropLast(num.length))
-            if (diff == 0) {
+            if (diff >= 0) {
                 val rainbow = intArrayOf(
                     Color.parseColor("#FF0000"), Color.parseColor("#FF7F00"), Color.parseColor("#FFFF00"),
                     Color.parseColor("#00FF00"), Color.parseColor("#0000FF"), Color.parseColor("#4B0082"),
@@ -482,7 +482,7 @@ class OverlayManager(
         } else {
             val v = s.rejectLeft
             tvRejectLeft.text = v.toString()
-            val color = if (v < 0) R.color.c_red else R.color.text
+            val color = if (v < 0) R.color.c_red else if (v > 0) R.color.c_green else R.color.text
             tvRejectLeft.setTextColor(ContextCompat.getColor(ctx, color))
         }
         val parts = mutableListOf<String>()
