@@ -68,6 +68,34 @@
               border: 6px solid #1c1f26; box-shadow: 0 12px 30px rgba(20,24,31,.22); background: #000; }
   .k { background: #eef2ff; color: var(--blue-ink); padding: 1px 8px; border-radius: 8px; font-weight: 700; white-space: nowrap; }
 
+  /* 안내사항 */
+  .notice { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 22px 20px; margin-top: 28px;
+            box-shadow: 0 2px 10px rgba(20,24,31,.04); font-size: 19px; }
+  .notice h3 { margin: 0 0 12px; font-size: 23px; font-weight: 900; display: flex; align-items: center; gap: 10px; }
+  .notice h3::before { content: ""; width: 6px; height: 24px; border-radius: 3px; background: var(--blue); }
+  .notice p { margin: 0 0 14px; }
+  .notice p:last-child { margin-bottom: 0; }
+  .notice .em { background: #fff1f0; border: 1px solid #ffc9c5; border-radius: 14px; padding: 14px 16px; margin: 14px 0; }
+  .notice .em .t { display: block; color: var(--red); font-weight: 900; font-size: 21px; margin-bottom: 8px; }
+  .notice .em b { color: #a3160f; }
+  .notice ul, .notice ol { margin: 0 0 14px; padding-left: 24px; }
+  .notice li { margin-bottom: 6px; }
+  .notice a { color: var(--blue); font-weight: 700; word-break: break-all; }
+  .src { display: block; background: #eef2ff; border-radius: 12px; padding: 12px 14px; text-decoration: none; margin-top: 10px; }
+
+  /* 목차 */
+  .toc { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 20px; margin-top: 28px;
+         box-shadow: 0 2px 10px rgba(20,24,31,.04); }
+  .toc h3 { margin: 0 0 12px; font-size: 23px; font-weight: 900; }
+  .toc ol { list-style: none; margin: 0; padding: 0; counter-reset: t; }
+  .toc li { counter-increment: t; }
+  .toc a { display: flex; align-items: center; gap: 12px; padding: 12px 6px; text-decoration: none; color: var(--ink);
+           font-weight: 700; font-size: 20px; border-top: 1px solid var(--line); }
+  .toc li:first-child a { border-top: 0; }
+  .toc a::before { content: counter(t); flex: none; width: 32px; height: 32px; border-radius: 10px; background: var(--blue); color: #fff;
+                   display: grid; place-items: center; font-size: 16px; }
+  .toc a small { margin-left: auto; color: var(--muted); font-weight: 400; font-size: 15px; }
+
   footer { text-align: center; color: var(--muted); font-size: 15px; margin-top: 40px; }
 </style>
 </head>
@@ -86,7 +114,52 @@
       <small id="dlv">최신 버전 설치 파일 (APK)</small></a>
   </div>
 
-  <section class="sec">
+  <div class="notice" id="notice">
+    <h3>안내사항</h3>
+    <p>이 앱은 제가 만들었습니다. 편하게 쓰려구요.<br>다른 기사님들께도 도움이 되고자 하는 마음에 공유해 봅니다.</p>
+    <div class="em">
+      <span class="t">강조 드립니다</span>
+      이 앱은 저 혼자 만든겁니다. 물론 제작은 허락 받았지만, 배포는 순수하게 다른 기사님들께 도움이 되고자 하는 마음에 제 개인이 공유하는거라
+      <b>관리자분들께 설치 요청이나 질문은 삼가주시길 부탁드립니다. 물어봐도 모르실겁니다ㅠ 담당 업무가 아니라서...</b>
+    </div>
+    <p>괜히 저로인해 본의아니게 피해를 드릴까 염려돼서 부탁드리겠습니다.<br>아래 설치법도 있으니 주변 기사님들께서 서로 도와주셨으면 좋겠습니다.</p>
+    <p>그리고 셋라 개발자님이 앱을 못만들어서 정식 배포가 안되고 있는 게 아닐겁니다.<br>제가 알기로 만드는 건 쉬운데 그걸 구글 플레이 스토어에 등록/심사 받는 과정이 매우 까다롭고 복잡합니다. 특히 시간도 많이 듭니다.<br>즉, 제가 이렇게 배포할 수 있는 이유는 잘나서가 아니라 119 소속 일반 기사로써 재능 기부 같은 개념이라 쉽게 가능한 것입니다. 오해 없으시면 좋겠습니다.</p>
+
+    <h3>기능 소개</h3>
+    <ul>
+      <li>setla 로그인/로그아웃</li>
+      <li>완료, 거절, 취소, 배달취소, 잔여거절권 조회</li>
+      <li>주간 총 완료/당일 순위/주간 순위 조회</li>
+      <li>설정에서 목표 갯수 저장 후 주간 목표 잔여 갯수 표시</li>
+    </ul>
+
+    <h3>특이사항</h3>
+    <ol>
+      <li>'출처를 알 수 없는 앱' 이란 건 구글 플레이 스토어에 등록되지 않은 모든 앱입니다. 제가 보안을 안지키거나 악용할 목적으로 기능을 넣어서 차단되는 게 아닙니다.</li>
+      <li>갤럭시 보안 정책이 번거롭게 만들어진 이유는 보안도 있지만 무엇보다 이런식으로 개인이 만들어서 배포하게 되는 것 자체를 막기 위함도 있습니다. 개발 시장을 보호하려는 의도 입니다.</li>
+    </ol>
+    <div class="em">
+      <span class="t">제가 만들어서 보안이 의심되신다면 다운로드 파일을 ai에게 주고 분석을 맡기셔도 됩니다.</span>
+      앱 자체가 경량화는 되어 있어도 암호화는 안되어 있습니다.<br>
+      누구든 열람 가능하고 그래도 불안하신 분들은 아래 오픈소스 링크를 열어보시면 앱을 만든 소스코드가 그대로 들어있습니다.<br>
+      그거 ai한테 주고 앱으로 빌드해달라고 해서 직접 만들어서 설치도 가능하십니다.
+      <a class="src" href="https://github.com/menotdie/119company">오픈소스 → github.com/menotdie/119company</a>
+    </div>
+  </div>
+
+  <nav class="toc" id="toc">
+    <h3>설치 순서 (목차)</h3>
+    <ol>
+      <li><a href="#s1">다운로드한 파일 열기 <small>1~4</small></a></li>
+      <li><a href="#s2">보안 잠금 잠시 풀기 <small>5~12</small></a></li>
+      <li><a href="#s3">설치하기 <small>13~14</small></a></li>
+      <li><a href="#s4">통화 중에도 보이게 하기 <small>15~17</small></a></li>
+      <li><a href="#s5">제한된 설정 허용하기 <small>18~22</small></a></li>
+      <li><a href="#s6">접근성 켜기 <small>23~25</small></a></li>
+    </ol>
+  </nav>
+
+  <section class="sec" id="s1">
     <div class="sec-h"><span class="no">1</span><h2>다운로드한 파일 열기</h2></div>
     <div class="step"><div class="head"><span class="n">1</span><p>홈 화면에서 <span class="k">내 파일</span> 을 누릅니다.</p></div><img src="img/01.jpg" alt=""></div>
     <div class="step"><div class="head"><span class="n">2</span><p><span class="k">다운로드</span> 를 누릅니다.</p></div><img src="img/02.jpg" alt=""></div>
@@ -95,7 +168,7 @@
       <span class="sub">폰의 보안 기능이 막은 것입니다. 아래 2번 순서대로 잠시 풀어 주면 됩니다.</span></p></div><img src="img/04.jpg" alt=""></div>
   </section>
 
-  <section class="sec">
+  <section class="sec" id="s2">
     <div class="sec-h"><span class="no">2</span><h2>보안 잠금 잠시 풀기</h2></div>
     <p class="tip">설치 끝나면 30분 뒤 자동으로 다시 켜집니다. 그러니 이 순서는 <b>한 번에 이어서</b> 해 주세요.</p>
     <div class="step"><div class="head"><span class="n">5</span><p>화면 맨 위를 아래로 쓸어내린 뒤 오른쪽 위 <span class="k">톱니바퀴(설정)</span> 를 누릅니다.</p></div><img src="img/05.jpg" alt=""></div>
@@ -109,13 +182,13 @@
     <div class="step"><div class="head"><span class="n">12</span><p>뒤로 가기를 눌러 7번 화면으로 돌아온 뒤, <span class="k">보안 위험 자동 차단</span> 스위치를 끄고 <span class="k">끄기</span> 를 누릅니다.</p></div><img src="img/12.jpg" alt=""></div>
   </section>
 
-  <section class="sec">
+  <section class="sec" id="s3">
     <div class="sec-h"><span class="no">3</span><h2>설치하기</h2></div>
     <div class="step"><div class="head"><span class="n">13</span><p>다시 1~3번처럼 <span class="k">내 파일</span> → <span class="k">다운로드</span> → <span class="k">119company_….apk</span> 를 누르고, <span class="k">설치</span> 를 누릅니다.</p></div><img src="img/13.jpg" alt=""></div>
     <div class="step"><div class="head"><span class="n">14</span><p>"앱이 설치됨" 이 뜨면 <span class="k">열기</span> 를 누릅니다.</p></div><img src="img/14.jpg" alt=""></div>
   </section>
 
-  <section class="sec">
+  <section class="sec" id="s4">
     <div class="sec-h"><span class="no">4</span><h2>통화 중에도 보이게 하기</h2></div>
     <div class="step"><div class="head"><span class="n">15</span><p>앱을 열면 안내가 뜹니다. <span class="k">접근성 설정 열기</span> 를 누릅니다.</p></div><img src="img/15.jpg" alt=""></div>
     <div class="step"><div class="head"><span class="n">16</span><p><span class="k">119COMPANY 통화 중 표시</span> 를 누릅니다.
@@ -124,7 +197,7 @@
       <span class="sub">아래 5번 순서대로 풀어 주면 됩니다.</span></p></div><img src="img/17.jpg" alt=""></div>
   </section>
 
-  <section class="sec">
+  <section class="sec" id="s5">
     <div class="sec-h"><span class="no">5</span><h2>제한된 설정 허용하기</h2></div>
     <div class="step"><div class="head"><span class="n">18</span><p>설정에서 <span class="k">애플리케이션</span> 을 누릅니다.</p></div><img src="img/18.jpg" alt=""></div>
     <div class="step"><div class="head"><span class="n">19</span><p>오른쪽 위 <span class="k">돋보기(검색)</span> 를 누릅니다.</p></div><img src="img/19.jpg" alt=""></div>
@@ -134,7 +207,7 @@
       <span class="sub">지문이나 비밀번호를 물으면 확인해 줍니다.</span></p></div><img src="img/22.jpg" alt=""></div>
   </section>
 
-  <section class="sec">
+  <section class="sec" id="s6">
     <div class="sec-h"><span class="no">6</span><h2>접근성 켜기</h2></div>
     <div class="step"><div class="head"><span class="n">23</span><p>홈 화면에서 <span class="k">119COMPANY</span> 앱을 다시 누릅니다. 15번 안내가 뜨면 다시 <span class="k">접근성 설정 열기</span>.</p></div><img src="img/23.jpg" alt=""></div>
     <div class="step"><div class="head"><span class="n">24</span><p><span class="k">119COMPANY 통화 중 표시</span> 를 누릅니다.
